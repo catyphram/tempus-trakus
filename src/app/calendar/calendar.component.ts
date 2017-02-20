@@ -3,20 +3,29 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'tt-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css']
+  styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
-  constructor() { }
 
-  ngOnInit() {
+  startDate: Date;
+  endDate: Date;
+  dates: Date[];
+
+  constructor() {
+    this.dates = [];
+    this.startDate = this.getStartDate();
+    this.endDate = this.getEndDate();
+
+    const loopingDate = new Date(this.startDate.getTime());
+
+    while(loopingDate <= this.endDate) {
+      this.dates.push(new Date(loopingDate.getTime()));
+      loopingDate.setDate(loopingDate.getDate() + 1);
+    }
   }
 
-  getStartAndEndDates(month: Date = new Date()): {startDate: Date, endDate: Date} {
+  ngOnInit() {
 
-    const startDate = this.getStartDate(month);
-    const endDate = this.getEndDate(month);
-
-    return {startDate, endDate};
   }
 
   getStartDate(month: Date = new Date()): Date {
