@@ -19,7 +19,8 @@
       "tsconfig": "tsconfig.json",
       "prefix": "tt",
       "styles": [
-        "styles.css"
+        "../node_modules/normalize.css/normalize.css",
+        "styles.scss"
       ],
       "scripts": [],
       "environments": {
