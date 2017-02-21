@@ -1,5 +1,5 @@
 <div *ngFor="let dateRow of dates | grid:7" class="tt-calendar__row">
   <div *ngFor="let date of dateRow" class="tt-calendar-date">
-    {{date}}
+    <tt-calendar-date [date]="date"></tt-calendar-date>
   </div>
 </div>
