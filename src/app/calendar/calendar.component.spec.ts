@@ -4,6 +4,9 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { CalendarComponent } from './calendar.component';
+import { GridPipe } from './grid.pipe';
+import { CalendarDateComponent } from './calendar-date/calendar-date.component';
+
 
 describe('CalendarComponent', () => {
   let component: CalendarComponent;
@@ -11,7 +14,11 @@ describe('CalendarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CalendarComponent ]
+      declarations: [
+        CalendarComponent,
+        GridPipe,
+        CalendarDateComponent
+      ]
     })
     .compileComponents();
   }));

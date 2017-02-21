@@ -21,7 +21,7 @@ export class CalendarComponent implements OnInit {
     const loopingDate: Date = new Date(startDate.getTime());
     const dates: Date[] = [];
 
-    while(loopingDate <= endDate) {
+    while (loopingDate <= endDate) {
       dates.push(new Date(loopingDate.getTime()));
       loopingDate.setDate(loopingDate.getDate() + 1);
     }

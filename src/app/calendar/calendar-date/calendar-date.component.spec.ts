@@ -19,6 +19,7 @@ describe('CalendarDateComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CalendarDateComponent);
     component = fixture.componentInstance;
+    component.date = new Date();
     fixture.detectChanges();
   });
 

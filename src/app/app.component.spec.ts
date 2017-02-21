@@ -2,12 +2,18 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { GridPipe } from './calendar/grid.pipe';
+import { CalendarDateComponent } from './calendar/calendar-date/calendar-date.component';
 
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        CalendarComponent,
+        GridPipe,
+        CalendarDateComponent
       ],
     });
     TestBed.compileComponents();
@@ -19,16 +25,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'Tempus Trakus'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Tempus Trakus');
-  }));
-
-  it('should render title in a h1 tag', async(() => {
+  it('should render calendar', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Tempus Trakus');
+    expect(compiled.querySelector('tt-calendar')).toBeTruthy();
   }));
 });
