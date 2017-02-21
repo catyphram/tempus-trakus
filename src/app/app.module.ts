@@ -5,11 +5,15 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { GridPipe } from './calendar/grid.pipe';
+import { CalendarDateComponent } from './calendar/calendar-date/calendar-date.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CalendarComponent
+    CalendarComponent,
+    GridPipe,
+    CalendarDateComponent
   ],
   imports: [
     BrowserModule,
