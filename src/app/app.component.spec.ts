@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { GridPipe } from './calendar/grid.pipe';
 import { CalendarDateComponent } from './calendar/calendar-date/calendar-date.component';
+import { CalendarNavComponent } from './calendar/calendar-nav/calendar-nav.component';
 
 describe('AppComponent', () => {
   beforeEach(() => {
@@ -13,7 +14,8 @@ describe('AppComponent', () => {
         AppComponent,
         CalendarComponent,
         GridPipe,
-        CalendarDateComponent
+        CalendarDateComponent,
+        CalendarNavComponent
       ],
     });
     TestBed.compileComponents();

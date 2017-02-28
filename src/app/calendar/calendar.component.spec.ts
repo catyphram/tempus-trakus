@@ -6,6 +6,7 @@ import { DebugElement } from '@angular/core';
 import { CalendarComponent } from './calendar.component';
 import { GridPipe } from './grid.pipe';
 import { CalendarDateComponent } from './calendar-date/calendar-date.component';
+import { CalendarNavComponent } from './calendar-nav/calendar-nav.component';
 
 
 describe('CalendarComponent', () => {
@@ -17,7 +18,8 @@ describe('CalendarComponent', () => {
       declarations: [
         CalendarComponent,
         GridPipe,
-        CalendarDateComponent
+        CalendarDateComponent,
+        CalendarNavComponent
       ]
     })
     .compileComponents();

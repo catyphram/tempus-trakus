@@ -6,6 +6,7 @@ export class CalendarService {
   constructor() { }
 
   getStartDate(month: Date = new Date()): Date {
+
     const startDate: Date = new Date(month.getTime());
     startDate.setDate(1);
 
@@ -16,6 +17,7 @@ export class CalendarService {
   }
 
   getEndDate(month: Date = new Date()): Date {
+
     const endDate: Date = new Date(month.getTime());
     endDate.setMonth(endDate.getMonth() + 1);
     endDate.setDate(0);
@@ -24,6 +26,21 @@ export class CalendarService {
     endDate.setDate(endDate.getDate() + daysToGoForward);
 
     return endDate;
+  }
+
+  getMonthDates(month: Date = new Date()): Date[] {
+
+    const startDate: Date = this.getStartDate(month);
+    const endDate: Date = this.getEndDate(month);
+    const loopingDate: Date = new Date(startDate.getTime());
+    const dates: Date[] = [];
+
+    while (loopingDate <= endDate) {
+      dates.push(new Date(loopingDate.getTime()));
+      loopingDate.setDate(loopingDate.getDate() + 1);
+    }
+
+    return dates;
   }
 
 }

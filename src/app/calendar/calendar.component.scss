@@ -2,10 +2,14 @@
   &__row {
     display: flex;
   }
+  &__dates {
+
+  }
 }
 
 tt-calendar-date {
   flex: 1;
   background-color: lightseagreen;
   margin: 5px;
+  height: 100px;
 }

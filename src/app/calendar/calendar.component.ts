@@ -10,23 +10,28 @@ import { CalendarService } from './calendar.service';
 })
 export class CalendarComponent implements OnInit {
 
+  month: Date;
   dates: Date[];
 
   constructor(private calendarService: CalendarService) { }
 
   ngOnInit() {
+    this.month = new Date();
+    this.updateDates();
+  }
 
-    const startDate: Date = this.calendarService.getStartDate();
-    const endDate: Date = this.calendarService.getEndDate();
-    const loopingDate: Date = new Date(startDate.getTime());
-    const dates: Date[] = [];
+  updateDates() {
+    this.dates = this.calendarService.getMonthDates(this.month);
+  }
 
-    while (loopingDate <= endDate) {
-      dates.push(new Date(loopingDate.getTime()));
-      loopingDate.setDate(loopingDate.getDate() + 1);
-    }
+  onShowPrevMonth() {
+    this.month.setMonth(this.month.getMonth() - 1);
+    this.updateDates();
+  }
 
-    this.dates = dates;
+  onShowNextMonth() {
+    this.month.setMonth(this.month.getMonth() + 1);
+    this.updateDates();
   }
 
 }

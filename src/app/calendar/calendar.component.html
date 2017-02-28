@@ -1,5 +1,10 @@
-<div *ngFor="let dateRow of dates | grid:7" class="tt-calendar__row">
-  <div *ngFor="let date of dateRow">
-    <tt-calendar-date [date]="date"></tt-calendar-date>
+<tt-calendar-nav
+  (showPrevMonth)="onShowPrevMonth()"
+  (showNextMonth)="onShowNextMonth()"
+></tt-calendar-nav>
+
+<div class="tt-calendar__dates">
+  <div *ngFor="let dateRow of dates | grid:7" class="tt-calendar__row">
+    <tt-calendar-date *ngFor="let date of dateRow" [date]="date"></tt-calendar-date>
   </div>
 </div>
