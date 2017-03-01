@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { CalendarService } from './calendar.service';
 
@@ -9,6 +9,8 @@ import { CalendarService } from './calendar.service';
   providers: [CalendarService]
 })
 export class CalendarComponent implements OnInit {
+
+  @Output() select = new EventEmitter<Date>();
 
   month: Date;
   dates: Date[];
@@ -32,6 +34,10 @@ export class CalendarComponent implements OnInit {
   onShowNextMonth() {
     this.month.setMonth(this.month.getMonth() + 1);
     this.updateDates();
+  }
+
+  onSelect(date: Date) {
+    this.select.emit(date);
   }
 
 }

@@ -5,4 +5,11 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent { }
+export class AppComponent {
+
+  date: Date = null;
+
+  onSelect(date: Date) {
+    this.date = date;
+  }
+}

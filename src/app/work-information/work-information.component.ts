@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'tt-work-information',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./work-information.component.scss']
 })
 export class WorkInformationComponent implements OnInit {
+
+  @Input() date: Date;
 
   constructor() { }
 
