@@ -1,6 +1,7 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
+import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { GridPipe } from './calendar/grid.pipe';
@@ -19,6 +20,9 @@ describe('AppComponent', () => {
         CalendarNavComponent,
         WorkInformationComponent
       ],
+      imports: [
+        SharedModule
+      ]
     });
     TestBed.compileComponents();
   });
