@@ -1,11 +1,15 @@
 {{date ? date.toLocaleDateString() : 'Select da date!'}}
 
 <!-- use form! -->
-<tt-toggle-button></tt-toggle-button>
-Start: <input type="text" />
-Ende: <input type="text" />
-Pause: <input type="text" />
-Dauer: <input type="text" />
+<button class="btn" (click)="onModeToggle()">{{mode.label}}</button>
+<div *ngIf="mode.id === 'time'">
+  Start: <input type="text" />
+  Ende: <input type="text" />
+  Pause: <input type="text" />
+</div>
+<div *ngIf="mode.id === 'duration'">
+  Dauer: <input type="text" />
+</div>
 <textarea>comment</textarea>
 Arbeitstag? <input type="checkbox" />
 <button class="btn">Save</button>
@@ -13,3 +17,7 @@ Arbeitstag? <input type="checkbox" />
 Tasklist
 WorkingHours
 -->
+
+onToggle
+initLabel
+switchLabel

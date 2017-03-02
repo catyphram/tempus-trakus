@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { SharedModule } from '../shared/shared.module';
 import { WorkInformationComponent } from './work-information.component';
 
 describe('WorkInformationComponent', () => {
@@ -12,8 +11,7 @@ describe('WorkInformationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WorkInformationComponent ],
-      imports: [ SharedModule ]
+      declarations: [ WorkInformationComponent ]
     })
     .compileComponents();
   }));
