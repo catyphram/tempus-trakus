@@ -4,7 +4,7 @@
 ></tt-calendar-nav>
 
 <div class="tt-calendar__dates">
-  <div *ngFor="let dateRow of dates | grid:7" class="tt-calendar__row">
-    <tt-calendar-date *ngFor="let date of dateRow" [date]="date" (click)="onSelect(date)"></tt-calendar-date>
+  <div *ngFor="let calendarDateRow of calendarDates | grid:7" class="tt-calendar__row">
+    <tt-calendar-date *ngFor="let calendarDate of calendarDateRow" [calendarDate]="calendarDate" (click)="onSelect(calendarDate)"></tt-calendar-date>
   </div>
 </div>

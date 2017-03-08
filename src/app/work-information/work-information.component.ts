@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { CalendarDate } from '../shared/structures/calendar-date';
 import { Mode } from './mode';
 
 @Component({
@@ -9,7 +10,7 @@ import { Mode } from './mode';
 })
 export class WorkInformationComponent implements OnInit {
 
-  @Input() date: Date;
+  @Input() calendarDate?: CalendarDate;
 
   mode: Mode;
   modes: Mode[] = [{

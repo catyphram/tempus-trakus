@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { CalendarDate } from '../../shared/structures/calendar-date';
+
 @Component({
   selector: 'tt-calendar-date',
   templateUrl: './calendar-date.component.html',
@@ -7,7 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CalendarDateComponent implements OnInit {
 
-  @Input() date: Date;
+  @Input() calendarDate: CalendarDate;
 
   constructor() { }
 

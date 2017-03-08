@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { CalendarDate } from './shared/structures/calendar-date';
+
 @Component({
   selector: 'tt-app',
   templateUrl: './app.component.html',
@@ -7,9 +9,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  date: Date = null;
+  calendarDate: CalendarDate = null;
 
-  onSelect(date: Date) {
-    this.date = date;
+  onSelect(calendarDate: CalendarDate) {
+    this.calendarDate = calendarDate;
   }
 }

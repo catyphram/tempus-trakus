@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { CalendarDateComponent } from './calendar-date.component';
+import { CalendarDate } from '../../shared/structures/calendar-date';
 
 describe('CalendarDateComponent', () => {
   let component: CalendarDateComponent;
@@ -19,7 +20,8 @@ describe('CalendarDateComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CalendarDateComponent);
     component = fixture.componentInstance;
-    component.date = new Date();
+    component.calendarDate = new CalendarDate();
+    component.calendarDate.date = new Date();
     fixture.detectChanges();
   });
 

@@ -1,9 +1,9 @@
-{{date ? date.toLocaleDateString() : 'Select da date!'}}
+{{calendarDate ? calendarDate.date.toLocaleDateString() : 'Select da date!'}}
 
 <!-- use form! -->
 <button class="btn" (click)="onModeToggle()">{{mode.label}}</button>
 <div *ngIf="mode.id === 'time'">
-  Start: <input type="text" />
+  Start: <input type="time" />
   Ende: <input type="text" />
   Pause: <input type="text" />
 </div>
@@ -17,7 +17,3 @@ Arbeitstag? <input type="checkbox" />
 Tasklist
 WorkingHours
 -->
-
-onToggle
-initLabel
-switchLabel

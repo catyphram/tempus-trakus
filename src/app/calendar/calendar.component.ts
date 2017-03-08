@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
+import { WorkInformation } from '../shared/structures/work-information';
+import { CalendarDate } from '../shared/structures/calendar-date';
 import { CalendarService } from './calendar.service';
 
 @Component({
@@ -10,34 +12,54 @@ import { CalendarService } from './calendar.service';
 })
 export class CalendarComponent implements OnInit {
 
-  @Output() select = new EventEmitter<Date>();
+  @Output() select = new EventEmitter<WorkInformation>();
 
+  isLoading: boolean;
   month: Date;
-  dates: Date[];
+  calendarDates: CalendarDate[];
 
   constructor(private calendarService: CalendarService) { }
 
   ngOnInit() {
     this.month = new Date();
     this.updateDates();
+    this.loadData();
   }
 
   updateDates() {
-    this.dates = this.calendarService.getMonthDates(this.month);
+    this.calendarDates = this.calendarService.getMonthDates(this.month);
   }
 
-  onShowPrevMonth() {
+  loadData() {
+    this.isLoading = true;
+
+    const workInformation = this.calendarService.getWorkInformation();
+    this.calendarService.mergeWorkInformation(this.calendarDates, workInformation);
+
+    this.isLoading = false;
+  }
+
+  onShowPrevMonth(): void {
     this.month.setMonth(this.month.getMonth() - 1);
     this.updateDates();
   }
 
-  onShowNextMonth() {
+  onShowNextMonth(): void {
     this.month.setMonth(this.month.getMonth() + 1);
     this.updateDates();
   }
 
-  onSelect(date: Date) {
-    this.select.emit(date);
+  onSelect(workInformation: WorkInformation): void {
+    this.select.emit(workInformation);
   }
 
 }
+/*
+Für die API/Frontend:
+workinformation[] aufsteigend sortiert, kann tage überspringen
+Anfänglich wird der letze, dieser und der nächste Monat geladen.
+Also Anfrage an die API mit Start und End-Datum inkl.
+Bei Klick auf nächsten oder vorherigen Monat wird der bereits geladene Monat angezeigt
+und der vorherige/nächste Monat vorgeladen.
+Bei direkter Enigabe des Datums wird der ensprechende Monat geladen, sowie der davor und danach.
+*/
