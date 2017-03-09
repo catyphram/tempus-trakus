@@ -1,6 +1,29 @@
+@import "./_variables";
+
 .btn {
   border: none;
   background-color: lightblue;
-  padding: 8px;
+  padding: 0 8px;
   color: white;
+  height: $inputHeight;
+}
+
+.input {
+  height: $inputHeight;
+  border-radius: 0;
+  border: 1px solid black;
+  padding: $inputPadding;
+  width: 100%;
+}
+
+.textarea {
+  width: 100%;
+  resize: vertical;
+  background-color: #FFF;
+  border-radius: 0;
+  border: 1px solid black;
+}
+
+.text-center {
+  text-align: center;
 }

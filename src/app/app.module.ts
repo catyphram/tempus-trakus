@@ -9,6 +9,7 @@ import { GridPipe } from './calendar/grid.pipe';
 import { CalendarDateComponent } from './calendar/calendar-date/calendar-date.component';
 import { CalendarNavComponent } from './calendar/calendar-nav/calendar-nav.component';
 import { WorkInformationComponent } from './work-information/work-information.component';
+import { WorkingHoursComponent } from './work-information/working-hours/working-hours.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { WorkInformationComponent } from './work-information/work-information.co
     GridPipe,
     CalendarDateComponent,
     CalendarNavComponent,
-    WorkInformationComponent
+    WorkInformationComponent,
+    WorkingHoursComponent
   ],
   imports: [
     BrowserModule,

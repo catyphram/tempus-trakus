@@ -1,7 +1,7 @@
-import { WorkInformation } from '../shared/structures/work-information';
+import { WorkInformation } from './work-information';
 
 export class CalendarDate {
   hasWorkInformation: boolean;
-  workInformation?: WorkInformation;
+  workInformation?: WorkInformation = null;
   date: Date;
 }

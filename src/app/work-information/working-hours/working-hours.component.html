@@ -1,0 +1,50 @@
+<div class="text-center">
+  <button class="btn" (click)="onModeToggle()">{{mode.label}}</button>
+</div>
+
+<div *ngIf="mode.id === 'time'">
+  <div class="tt-working-hours__row">
+    <div class="tt-working-hours__col">
+      <span>Start</span>
+    </div>
+    <div class="tt-working-hours__col">
+      <input type="text" class="input" />
+    </div>
+  </div>
+  <div class="tt-working-hours__row">
+    <div class="tt-working-hours__col">
+      <span>Ende</span>
+    </div>
+    <div class="tt-working-hours__col">
+      <input type="text" class="input" />
+    </div>
+  </div>
+  <div class="tt-working-hours__row">
+    <div class="tt-working-hours__col">
+      <span>Pause</span>
+    </div>
+    <div class="tt-working-hours__col">
+      <input type="text" class="input" />
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mode.id === 'duration'">
+  <div class="tt-working-hours__row">
+    <div class="tt-working-hours__col">
+      <span>Dauer</span>
+    </div>
+    <div class="tt-working-hours__col">
+      <input type="text" class="input" />
+    </div>
+  </div>
+</div>
+
+<div class="tt-working-hours__row">
+  <div class="tt-working-hours__col">
+    <span>Arbeitstag</span>
+  </div>
+  <div class="tt-working-hours__col">
+    <input type="checkbox" />
+  </div>
+</div>

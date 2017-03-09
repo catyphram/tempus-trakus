@@ -1,0 +1,10 @@
+.tt-working-hours {
+  &__row {
+    display: flex;
+    align-items: center;
+  }
+  &__col {
+    width: 50%;
+    flex: 1;
+  }
+}

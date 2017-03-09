@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { CalendarDate } from '../shared/structures/calendar-date';
-import { Mode } from './mode';
 
 @Component({
   selector: 'tt-work-information',
@@ -12,23 +11,9 @@ export class WorkInformationComponent implements OnInit {
 
   @Input() calendarDate?: CalendarDate;
 
-  mode: Mode;
-  modes: Mode[] = [{
-    id: 'time',
-    label: 'Time'
-  }, {
-    id: 'duration',
-    label: 'Duration'
-  }];
-
   constructor() { }
 
-  ngOnInit(): void {
-    this.mode = this.modes[0];
-  }
-
-  onModeToggle(): void {
-    this.mode = this.mode.id === this.modes[0].id ? this.modes[1] : this.modes[0];
+  ngOnInit() {
   }
 
 }

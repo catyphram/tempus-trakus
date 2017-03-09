@@ -1,19 +1,18 @@
-{{calendarDate ? calendarDate.date.toLocaleDateString() : 'Select da date!'}}
+<form>
+  <div class="text-center">
+    <span>{{calendarDate ? calendarDate.date.toLocaleDateString() : 'Datum auswählen'}}</span>
+  </div>
+  <tt-working-hours [workingHours]="calendarDate ? ( calendarDate.workInformation ? calendarDate.workInformation.workingHours : null ) : null"></tt-working-hours>
+  <div>
+    <textarea class="textarea" rows="2"></textarea>
+  </div>
+  <div class="text-center">
+    <button class="btn">Speichern</button>
+  </div>
+</form>
 
-<!-- use form! -->
-<button class="btn" (click)="onModeToggle()">{{mode.label}}</button>
-<div *ngIf="mode.id === 'time'">
-  Start: <input type="time" />
-  Ende: <input type="text" />
-  Pause: <input type="text" />
-</div>
-<div *ngIf="mode.id === 'duration'">
-  Dauer: <input type="text" />
-</div>
-<textarea>comment</textarea>
-Arbeitstag? <input type="checkbox" />
-<button class="btn">Save</button>
 <!--
 Tasklist
-WorkingHours
+i18n
+checkbox component?
 -->
