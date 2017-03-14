@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { CalendarDate } from './shared/structures/calendar-date';
+import { WorkDateInformation } from './shared/structures/work-date-information';
 
 @Component({
   selector: 'tt-app',
@@ -9,9 +9,13 @@ import { CalendarDate } from './shared/structures/calendar-date';
 })
 export class AppComponent {
 
-  calendarDate: CalendarDate = null;
+  workDateInformation: WorkDateInformation = null;
 
-  onSelect(calendarDate: CalendarDate) {
-    this.calendarDate = calendarDate;
+  onSelect(workDateInformation: WorkDateInformation) {
+    this.workDateInformation = workDateInformation;
+  }
+
+  printInfos() {
+    return JSON.stringify(this.workDateInformation);
   }
 }

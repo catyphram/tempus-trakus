@@ -11,7 +11,7 @@ import { Mode } from './mode';
 })
 export class WorkingHoursComponent implements OnInit {
 
-  @Input() workingHours?: WorkingHours;
+  @Input() workingHours: WorkingHours = new WorkingHours();
 
   mode: Mode;
   modes: Mode[] = [{
@@ -29,6 +29,7 @@ export class WorkingHoursComponent implements OnInit {
   }
 
   onModeToggle(): void {
+    console.log(this.workingHours);
     this.mode = this.mode.id === this.modes[0].id ? this.modes[1] : this.modes[0];
   }
 

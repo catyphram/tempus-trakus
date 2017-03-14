@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { WorkInformation } from '../shared/structures/work-information';
 import { WorkingHours } from '../shared/structures/working-hours';
-import { CalendarDate } from '../shared/structures/calendar-date';
+import { WorkDateInformation } from '../shared/structures/work-date-information';
 
 @Injectable()
 export class CalendarService {
@@ -32,33 +32,32 @@ export class CalendarService {
     return endDate;
   }
 
-  getMonthDates(month: Date = new Date()): CalendarDate[] {
+  getMonthDates(month: Date = new Date()): WorkDateInformation[] {
 
     const startDate: Date = this.getStartDate(month);
     const endDate: Date = this.getEndDate(month);
     const loopingDate: Date = new Date(startDate.getTime());
-    const calendarDates: CalendarDate[] = [];
+    const workDateInformationArray: WorkDateInformation[] = [];
 
     while (loopingDate <= endDate) {
 
-      const calendarDate = new CalendarDate();
+      const workDateInformation = new WorkDateInformation();
 
-      calendarDate.hasWorkInformation = false;
-      calendarDate.date = new Date(loopingDate.getTime());
+      workDateInformation.date = new Date(loopingDate.getTime());
 
-      calendarDates.push(calendarDate);
+      workDateInformationArray.push(workDateInformation);
 
       loopingDate.setDate(loopingDate.getDate() + 1);
     }
 
-    return calendarDates;
+    return workDateInformationArray;
   }
 
   /**
-   * Insertion of WorkInformation into CalendarDate objects.
+   * Insertion of WorkInformation into WorkDateInformation objects.
    * Be alert that no new objects are created but existing are transformed
   **/
-  mergeWorkInformation(calendarDates: CalendarDate[], data: WorkInformation[]): void {
+  mergeWorkInformation(workDateInformationArray: WorkDateInformation[], data: WorkDateInformation[]): void {
 
     /**
      * We are working with an index to increase performance
@@ -67,21 +66,20 @@ export class CalendarService {
     **/
     let startIndex = 0;
 
-    calendarDates.forEach((calendarDate) => {
+    workDateInformationArray.forEach((workDateInformation) => {
 
-      let workInformation = null;
+      let workInformation: WorkInformation = null;
 
       for (let i = startIndex; i < data.length; i++) {
-        if (this.dateIsEqual(calendarDate.date, data[i].date)) {
-          workInformation = data[i];
+        if (this.dateIsEqual(workDateInformation.date, data[i].date)) {
+          workInformation = data[i].workInformation;
           ++startIndex;
           break;
         }
       }
 
       if (workInformation) {
-        calendarDate.hasWorkInformation = true;
-        calendarDate.workInformation = workInformation;
+        workDateInformation.workInformation = workInformation;
       }
 
     });
@@ -94,33 +92,35 @@ export class CalendarService {
             date1.getFullYear() === date2.getFullYear();
   }
 
-  getWorkInformation(): WorkInformation[] {
+  getWorkInformation(): WorkDateInformation[] {
 
-    const mockWorkInformation = [
-      new WorkInformation(),
-      new WorkInformation(),
-      new WorkInformation()
+    const mockWorkDateInformation = [
+      new WorkDateInformation(),
+      new WorkDateInformation(),
+      new WorkDateInformation()
     ];
-    mockWorkInformation[0].date = new Date(2017, 2, 4);
-    mockWorkInformation[0].workingHours = new WorkingHours();
-    mockWorkInformation[0].workingHours.start = '10:00';
-    mockWorkInformation[0].workingHours.pause = '0:30';
-    mockWorkInformation[0].workingHours.end = '18:00';
-    mockWorkInformation[0].workingHours.isWorkingDay = false;
+    mockWorkDateInformation[0].date = new Date(2017, 2, 4);
+    mockWorkDateInformation[0].workInformation = new WorkInformation();
+    mockWorkDateInformation[0].workInformation.workingHours = new WorkingHours();
+    mockWorkDateInformation[0].workInformation.workingHours.start = '10:00';
+    mockWorkDateInformation[0].workInformation.workingHours.pause = '0:30';
+    mockWorkDateInformation[0].workInformation.workingHours.end = '18:00';
+    mockWorkDateInformation[0].workInformation.workingHours.isWorkingDay = false;
 
-    mockWorkInformation[1].date = new Date(2017, 2, 15);
+    mockWorkDateInformation[1].date = new Date(2017, 2, 15);
+    mockWorkDateInformation[1].workInformation = new WorkInformation();
+    mockWorkDateInformation[1].workInformation.workingHours = new WorkingHours();
+    mockWorkDateInformation[1].workInformation.workingHours.start = '10:30';
+    mockWorkDateInformation[1].workInformation.workingHours.pause = '1:00';
+    mockWorkDateInformation[1].workInformation.workingHours.end = '20:30';
 
-    mockWorkInformation[1].workingHours = new WorkingHours();
-    mockWorkInformation[1].workingHours.start = '10:30';
-    mockWorkInformation[1].workingHours.pause = '1:00';
-    mockWorkInformation[1].workingHours.end = '20:30';
+    mockWorkDateInformation[2].date = new Date(2017, 2, 23);
+    mockWorkDateInformation[2].workInformation = new WorkInformation();
+    mockWorkDateInformation[2].workInformation.workingHours = new WorkingHours();
+    mockWorkDateInformation[2].workInformation.workingHours.duration = '8:00';
+    mockWorkDateInformation[2].workInformation.comment = 'Harter Stoff';
 
-    mockWorkInformation[2].date = new Date(2017, 2, 23);
-    mockWorkInformation[2].workingHours = new WorkingHours();
-    mockWorkInformation[2].workingHours.duration = '8:00';
-    mockWorkInformation[2].comment = 'Harter Stoff';
-
-    return mockWorkInformation;
+    return mockWorkDateInformation;
   }
 
 }

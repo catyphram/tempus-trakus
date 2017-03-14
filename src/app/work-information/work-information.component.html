@@ -1,8 +1,8 @@
-<form>
+<form *ngIf="bufferWorkDateInformation">
   <div class="text-center">
-    <span>{{calendarDate ? calendarDate.date.toLocaleDateString() : 'Datum auswählen'}}</span>
+    <span>{{bufferWorkDateInformation.date.toLocaleDateString()}}</span>
   </div>
-  <tt-working-hours [workingHours]="calendarDate ? ( calendarDate.workInformation ? calendarDate.workInformation.workingHours : null ) : null"></tt-working-hours>
+  <tt-working-hours [workingHours]="bufferWorkDateInformation.workInformation ? bufferWorkDateInformation.workInformation.workingHours : null"></tt-working-hours>
   <div>
     <textarea class="textarea" rows="2"></textarea>
   </div>
@@ -10,7 +10,9 @@
     <button class="btn">Speichern</button>
   </div>
 </form>
-
+<div *ngIf="!bufferWorkDateInformation" class="text-center">
+  <span>Datum auswählen</span>
+</div>
 <!--
 Tasklist
 i18n

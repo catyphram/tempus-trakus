@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { CalendarDate } from '../../shared/structures/calendar-date';
+import { WorkDateInformation } from '../../shared/structures/work-date-information';
 
 @Component({
   selector: 'tt-calendar-date',
@@ -9,7 +9,7 @@ import { CalendarDate } from '../../shared/structures/calendar-date';
 })
 export class CalendarDateComponent implements OnInit {
 
-  @Input() calendarDate: CalendarDate;
+  @Input() workDateInformation: WorkDateInformation;
 
   constructor() { }
 
