@@ -22,11 +22,11 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
     this.month = new Date();
     this.updateDates();
-    this.loadData();
   }
 
   updateDates() {
     this.workDateInformationArray = this.calendarService.getMonthDates(this.month);
+    this.loadData();
   }
 
   loadData() {

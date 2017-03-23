@@ -23,16 +23,7 @@ export class WorkInformationComponent implements OnInit, OnChanges {
   }
 
   updateBufferWorkDateInformation(workDateInformation: WorkDateInformation) {
-    /* maybe really only use workinformation obj here
-
-      also cone the object (create blank one and fill properties probably)
-    */
-
-    this.bufferWorkDateInformation = workDateInformation;
-
-    if (workDateInformation) {
-      this.bufferWorkDateInformation.workInformation = this.bufferWorkDateInformation.workInformation || new WorkInformation();
-    }
+    this.bufferWorkDateInformation = workDateInformation ? workDateInformation.clone() : null;
   }
 
 }
