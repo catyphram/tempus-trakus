@@ -26,7 +26,7 @@ export class WorkInformationComponent implements OnInit, OnChanges {
   updateBufferWorkDateInformation(workDateInformation: WorkDateInformation) {
     if (workDateInformation) {
       this.bufferWorkDateInformation = workDateInformation.clone();
-      this.bufferWorkDateInformation.workInformation = new WorkInformation();
+      this.bufferWorkDateInformation.workInformation = this.bufferWorkDateInformation.workInformation || new WorkInformation();
     } else {
       this.bufferWorkDateInformation = null;
     }
