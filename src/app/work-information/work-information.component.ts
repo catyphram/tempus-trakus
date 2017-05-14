@@ -16,6 +16,7 @@ export class WorkInformationComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {
+    this.updateBufferWorkDateInformation(this.workDateInformation);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -23,7 +24,12 @@ export class WorkInformationComponent implements OnInit, OnChanges {
   }
 
   updateBufferWorkDateInformation(workDateInformation: WorkDateInformation) {
-    this.bufferWorkDateInformation = workDateInformation ? workDateInformation.clone() : null;
+    if (workDateInformation) {
+      this.bufferWorkDateInformation = workDateInformation.clone();
+      this.bufferWorkDateInformation.workInformation = new WorkInformation();
+    } else {
+      this.bufferWorkDateInformation = null;
+    }
   }
 
 }
