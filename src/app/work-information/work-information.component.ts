@@ -1,6 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
-import { WorkDateInformation } from '../shared/structures/work-date-information';
 import { WorkInformation } from '../shared/structures/work-information';
 
 @Component({
@@ -10,25 +9,24 @@ import { WorkInformation } from '../shared/structures/work-information';
 })
 export class WorkInformationComponent implements OnInit, OnChanges {
 
-  bufferWorkDateInformation: WorkDateInformation = null;
-  @Input() workDateInformation?: WorkDateInformation = null;
+  bufferWorkInformation: WorkInformation = null;
+  @Input() workInformation?: WorkInformation = null;
 
   constructor() { }
 
   ngOnInit() {
-    this.updateBufferWorkDateInformation(this.workDateInformation);
+    this.updateBufferWorkInformation(this.workInformation);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.updateBufferWorkDateInformation(changes['workDateInformation'].currentValue);
+    this.updateBufferWorkInformation(changes['workInformation'].currentValue);
   }
 
-  updateBufferWorkDateInformation(workDateInformation: WorkDateInformation) {
-    if (workDateInformation) {
-      this.bufferWorkDateInformation = workDateInformation.clone();
-      this.bufferWorkDateInformation.workInformation = this.bufferWorkDateInformation.workInformation || new WorkInformation();
+  updateBufferWorkInformation(workInformation: WorkInformation) {
+    if (workInformation) {
+      this.bufferWorkInformation = workInformation.clone();
     } else {
-      this.bufferWorkDateInformation = null;
+      this.bufferWorkInformation = null;
     }
   }
 

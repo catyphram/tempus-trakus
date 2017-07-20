@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { WorkDateInformation } from '../shared/structures/work-date-information';
+import { WorkDateInformation } from './work-date-information';
 import { CalendarService } from './calendar.service';
 
 @Component({
@@ -48,8 +48,8 @@ export class CalendarComponent implements OnInit {
     this.updateDates();
   }
 
-  onSelect(workInformation: WorkDateInformation): void {
-    this.select.emit(workInformation);
+  onSelect(workDateInformation: WorkDateInformation): void {
+    this.select.emit(workDateInformation);
   }
 
 }

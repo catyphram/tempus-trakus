@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 import { WorkInformation } from '../shared/structures/work-information';
 import { WorkingHours } from '../shared/structures/working-hours';
-import { WorkDateInformation } from '../shared/structures/work-date-information';
+import { WorkDateInformation } from './work-date-information';
 
 @Injectable()
 export class CalendarService {
 
-  constructor() { }
+  constructor(private http: Http) { }
 
   getStartDate(month: Date = new Date()): Date {
 
@@ -55,9 +59,9 @@ export class CalendarService {
 
   /**
    * Insertion of WorkInformation into WorkDateInformation objects.
-   * Be alert that no new objects are created but existing are transformed
+   * Be alert that no new objects are created but existing ones are transformed
   **/
-  mergeWorkInformation(workDateInformationArray: WorkDateInformation[], data: WorkDateInformation[]): void {
+  mergeWorkInformation(workDateInformationArray: WorkDateInformation[], data: WorkInformation[]): void {
 
     /**
      * We are working with an index to increase performance
@@ -72,14 +76,10 @@ export class CalendarService {
 
       for (let i = startIndex; i < data.length; i++) {
         if (this.dateIsEqual(workDateInformation.date, data[i].date)) {
-          workInformation = data[i].workInformation;
+          workDateInformation.workInformation = data[i];
           ++startIndex;
           break;
         }
-      }
-
-      if (workInformation) {
-        workDateInformation.workInformation = workInformation;
       }
 
     });
@@ -92,35 +92,65 @@ export class CalendarService {
             date1.getFullYear() === date2.getFullYear();
   }
 
-  getWorkInformation(): WorkDateInformation[] {
+  getWorkInformation(): WorkInformation[] {
 
-    const mockWorkDateInformation = [
-      new WorkDateInformation(),
-      new WorkDateInformation(),
-      new WorkDateInformation()
+    const abc: Observable<WorkInformation[]> = this.http.get('http://localhost:3000/workinformation')
+                         .map(this.extractData)
+                         .catch(this.handleError);
+
+    abc.subscribe(
+      data => {
+        console.log('success', data);
+        console.log(new WorkInformation().fromJSON(data[0]));
+      },
+      error => console.log('error', error)
+    );
+
+
+    const mockWorkInformation = [
+      new WorkInformation(),
+      new WorkInformation(),
+      new WorkInformation()
     ];
-    mockWorkDateInformation[0].date = new Date(2017, 2, 4);
-    mockWorkDateInformation[0].workInformation = new WorkInformation();
-    mockWorkDateInformation[0].workInformation.workingHours = new WorkingHours();
-    mockWorkDateInformation[0].workInformation.workingHours.start = '10:00';
-    mockWorkDateInformation[0].workInformation.workingHours.pause = '0:30';
-    mockWorkDateInformation[0].workInformation.workingHours.end = '18:00';
-    mockWorkDateInformation[0].workInformation.workingHours.isWorkingDay = false;
+    mockWorkInformation[0].date = new Date(2017, 2, 4);
+    mockWorkInformation[0].workingHours = new WorkingHours();
+    mockWorkInformation[0].workingHours.start = '10:00';
+    mockWorkInformation[0].workingHours.pause = '0:30';
+    mockWorkInformation[0].workingHours.end = '18:00';
+    mockWorkInformation[0].workingHours.isWorkingDay = false;
 
-    mockWorkDateInformation[1].date = new Date(2017, 2, 15);
-    mockWorkDateInformation[1].workInformation = new WorkInformation();
-    mockWorkDateInformation[1].workInformation.workingHours = new WorkingHours();
-    mockWorkDateInformation[1].workInformation.workingHours.start = '10:30';
-    mockWorkDateInformation[1].workInformation.workingHours.pause = '1:00';
-    mockWorkDateInformation[1].workInformation.workingHours.end = '20:30';
+    mockWorkInformation[1].date = new Date(2017, 2, 15);
+    mockWorkInformation[1].workingHours = new WorkingHours();
+    mockWorkInformation[1].workingHours.start = '10:30';
+    mockWorkInformation[1].workingHours.pause = '1:00';
+    mockWorkInformation[1].workingHours.end = '20:30';
 
-    mockWorkDateInformation[2].date = new Date(2017, 2, 23);
-    mockWorkDateInformation[2].workInformation = new WorkInformation();
-    mockWorkDateInformation[2].workInformation.workingHours = new WorkingHours();
-    mockWorkDateInformation[2].workInformation.workingHours.duration = '8:00';
-    mockWorkDateInformation[2].workInformation.comment = 'Harter Stoff';
+    mockWorkInformation[2].date = new Date(2017, 2, 23);
+    mockWorkInformation[2].workingHours = new WorkingHours();
+    mockWorkInformation[2].workingHours.duration = '8:00';
+    mockWorkInformation[2].comment = 'Harter Stoff';
 
-    return mockWorkDateInformation;
+    return mockWorkInformation;
+  }
+
+
+  // Todo: move both methods below to shared service class
+  private extractData(res: Response) {
+    let body = res.json();
+    return body.data || { };
+  }
+
+  private handleError (error: Response | any) {
+    // In a real world app, you might use a remote logging infrastructure
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    return Observable.throw(errMsg);
   }
 
 }

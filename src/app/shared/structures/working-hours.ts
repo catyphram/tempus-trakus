@@ -1,4 +1,6 @@
-export class WorkingHours {
+import { Serializable } from './serializable';
+
+export class WorkingHours extends Serializable {
   start?: string;
   end?: string;
   pause?: string;
@@ -15,5 +17,16 @@ export class WorkingHours {
     clone.isWorkingDay = this.isWorkingDay;
 
     return clone;
+  }
+
+  fromJSON(json: any): WorkingHours {
+    this.isWorkingDay = json.isWorkingDay;
+
+    if (json.start) this.start = json.start;
+    if (json.end) this.end = json.end;
+    if (json.pause) this.pause = json.pause;
+    if (json.duration) this.duration = json.duration;
+
+    return this;
   }
 }
