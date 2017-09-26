@@ -1,6 +1,4 @@
-export abstract class Serializable {
+export interface Serializable {
   /** creates a new object from a blank json object */
-  abstract fromJSON(json: any): void
-  /** creates a copy of the object */
-  abstract clone(): any
+  fromJSON(json: any): void;
 }

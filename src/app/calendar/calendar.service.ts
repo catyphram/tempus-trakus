@@ -6,7 +6,6 @@ import 'rxjs/add/operator/map';
 
 import { WorkInformation } from '../shared/structures/work-information';
 import { WorkingHours } from '../shared/structures/working-hours';
-import { WorkDateInformation } from './work-date-information';
 
 @Injectable()
 export class CalendarService {
@@ -36,32 +35,32 @@ export class CalendarService {
     return endDate;
   }
 
-  getMonthDates(month: Date = new Date()): WorkDateInformation[] {
+  getMonthDates(month: Date = new Date()): WorkInformation[] {
 
     const startDate: Date = this.getStartDate(month);
     const endDate: Date = this.getEndDate(month);
     const loopingDate: Date = new Date(startDate.getTime());
-    const workDateInformationArray: WorkDateInformation[] = [];
+    const workInformationArray: WorkInformation[] = [];
 
     while (loopingDate <= endDate) {
 
-      const workDateInformation = new WorkDateInformation();
+      const workInformation = new WorkInformation();
 
-      workDateInformation.date = new Date(loopingDate.getTime());
+      workInformation.date = new Date(loopingDate.getTime());
 
-      workDateInformationArray.push(workDateInformation);
+      workInformationArray.push(workInformation);
 
       loopingDate.setDate(loopingDate.getDate() + 1);
     }
 
-    return workDateInformationArray;
+    return workInformationArray;
   }
 
   /**
-   * Insertion of WorkInformation into WorkDateInformation objects.
+   * Insertion of WorkInformation into WorkInformation objects.
    * Be alert that no new objects are created but existing ones are transformed
   **/
-  mergeWorkInformation(workDateInformationArray: WorkDateInformation[], data: WorkInformation[]): void {
+  mergeWorkInformation(workInformationArray: WorkInformation[], data: WorkInformation[]): void {
 
     /**
      * We are working with an index to increase performance
@@ -70,13 +69,13 @@ export class CalendarService {
     **/
     let startIndex = 0;
 
-    workDateInformationArray.forEach((workDateInformation) => {
+    workInformationArray.forEach((workInformationItem) => {
 
       let workInformation: WorkInformation = null;
 
       for (let i = startIndex; i < data.length; i++) {
-        if (this.dateIsEqual(workDateInformation.date, data[i].date)) {
-          workDateInformation.workInformation = data[i];
+        if (this.dateIsEqual(workInformationItem.date, data[i].date)) {
+          workInformation = data[i];
           ++startIndex;
           break;
         }
@@ -94,17 +93,17 @@ export class CalendarService {
 
   getWorkInformation(): WorkInformation[] {
 
-    const abc: Observable<WorkInformation[]> = this.http.get('http://localhost:3000/workinformation')
-                         .map(this.extractData)
-                         .catch(this.handleError);
-
-    abc.subscribe(
-      data => {
-        console.log('success', data);
-        console.log(new WorkInformation().fromJSON(data[0]));
-      },
-      error => console.log('error', error)
-    );
+    // const abc: Observable<WorkInformation[]> = this.http.get('http://localhost:3000/workinformation')
+    //                      .map(this.extractData)
+    //                      .catch(this.handleError);
+    //
+    // abc.subscribe(
+    //   data => {
+    //     console.log('success', data);
+    //     console.log(new WorkInformation().fromJSON(data[0]));
+    //   },
+    //   error => console.log('error', error)
+    // );
 
 
     const mockWorkInformation = [
@@ -133,24 +132,24 @@ export class CalendarService {
     return mockWorkInformation;
   }
 
-
-  // Todo: move both methods below to shared service class
-  private extractData(res: Response) {
-    let body = res.json();
-    return body.data || { };
-  }
-
-  private handleError (error: Response | any) {
-    // In a real world app, you might use a remote logging infrastructure
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
-    return Observable.throw(errMsg);
-  }
+  //
+  // // Todo: move both methods below to shared service class
+  // private extractData(res: Response) {
+  //   let body = res.json();
+  //   return body.data || { };
+  // }
+  //
+  // private handleError (error: Response | any) {
+  //   // In a real world app, you might use a remote logging infrastructure
+  //   let errMsg: string;
+  //   if (error instanceof Response) {
+  //     const body = error.json() || '';
+  //     const err = body.error || JSON.stringify(body);
+  //     errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+  //   } else {
+  //     errMsg = error.message ? error.message : error.toString();
+  //   }
+  //   return Observable.throw(errMsg);
+  // }
 
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 
 import { WorkInformation } from '../shared/structures/work-information';
 
@@ -7,27 +7,10 @@ import { WorkInformation } from '../shared/structures/work-information';
   templateUrl: './work-information.component.html',
   styleUrls: ['./work-information.component.scss']
 })
-export class WorkInformationComponent implements OnInit, OnChanges {
+export class WorkInformationComponent {
 
-  bufferWorkInformation: WorkInformation = null;
   @Input() workInformation?: WorkInformation = null;
 
   constructor() { }
-
-  ngOnInit() {
-    this.updateBufferWorkInformation(this.workInformation);
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    this.updateBufferWorkInformation(changes['workInformation'].currentValue);
-  }
-
-  updateBufferWorkInformation(workInformation: WorkInformation) {
-    if (workInformation) {
-      this.bufferWorkInformation = workInformation.clone();
-    } else {
-      this.bufferWorkInformation = null;
-    }
-  }
 
 }

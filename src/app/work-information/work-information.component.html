@@ -1,8 +1,8 @@
-<form *ngIf="bufferWorkInformation">
+<form *ngIf="workInformation">
   <div class="text-center">
-    <span>{{bufferWorkInformation.date.toLocaleDateString()}}</span>
+    <span>{{workInformation.date.toLocaleDateString()}}</span>
   </div>
-  <tt-working-hours [workingHours]="bufferWorkInformation.workingHours"></tt-working-hours>
+  <tt-working-hours [workingHours]="workInformation.workingHours"></tt-working-hours>
   <div>
     <textarea class="textarea" rows="2"></textarea>
   </div>
@@ -10,7 +10,7 @@
     <button class="btn">Speichern</button>
   </div>
 </form>
-<div *ngIf="!bufferWorkInformation" class="text-center">
+<div *ngIf="!workInformation" class="text-center">
   <span>Datum auswählen</span>
 </div>
 <!--

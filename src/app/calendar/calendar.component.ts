@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { WorkDateInformation } from './work-date-information';
+import { WorkInformation } from '../shared/structures/work-information';
 import { CalendarService } from './calendar.service';
 
 @Component({
@@ -11,11 +11,11 @@ import { CalendarService } from './calendar.service';
 })
 export class CalendarComponent implements OnInit {
 
-  @Output() select = new EventEmitter<WorkDateInformation>();
+  @Output() select = new EventEmitter<WorkInformation>();
 
   isLoading: boolean;
   month: Date;
-  workDateInformationArray: WorkDateInformation[];
+  workInformation: WorkInformation[];
 
   constructor(private calendarService: CalendarService) { }
 
@@ -25,7 +25,7 @@ export class CalendarComponent implements OnInit {
   }
 
   updateDates() {
-    this.workDateInformationArray = this.calendarService.getMonthDates(this.month);
+    this.workInformation = this.calendarService.getMonthDates(this.month);
     this.loadData();
   }
 
@@ -33,7 +33,7 @@ export class CalendarComponent implements OnInit {
     this.isLoading = true;
 
     const workInformation = this.calendarService.getWorkInformation();
-    this.calendarService.mergeWorkInformation(this.workDateInformationArray, workInformation);
+    this.calendarService.mergeWorkInformation(this.workInformation, workInformation);
 
     this.isLoading = false;
   }
@@ -48,8 +48,8 @@ export class CalendarComponent implements OnInit {
     this.updateDates();
   }
 
-  onSelect(workDateInformation: WorkDateInformation): void {
-    this.select.emit(workDateInformation);
+  onSelect(workInformation: WorkInformation): void {
+    this.select.emit(workInformation);
   }
 
 }

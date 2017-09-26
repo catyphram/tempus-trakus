@@ -1,7 +1,8 @@
 import { Serializable } from './serializable';
+import { Cloneable } from './cloneable';
 import { WorkingHours } from './working-hours';
 
-export class WorkInformation extends Serializable {
+export class WorkInformation implements Serializable, Cloneable {
   date: Date;
   workingHours: WorkingHours = new WorkingHours();
   comment?: string;
@@ -22,7 +23,7 @@ export class WorkInformation extends Serializable {
     this.date = new Date(date[2], date[1] - 1, date[0]);
     this.workingHours = new WorkingHours().fromJSON(json.workingHours);
 
-    if (json.comment) this.comment = json.comment;
+    if (json.comment) { this.comment = json.comment; };
 
     return this;
   }
